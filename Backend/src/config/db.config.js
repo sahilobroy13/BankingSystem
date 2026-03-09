@@ -6,7 +6,7 @@ async function ConnectToDb(){
         console.log("Database Connected Successfully! ");
     })
     .catch(err =>{
-        console.log("Database connection Failed! ")
+        console.log("Database connection Failed! " , err)
         process.exit(1);
     })
 }
