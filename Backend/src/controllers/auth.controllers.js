@@ -1,6 +1,7 @@
 const userModel = require("../model/user.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const emailService = require("../services/email.service")
 
 async function registerController(req,res) {
   try {
@@ -23,6 +24,7 @@ async function registerController(req,res) {
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
     res.cookie("token", token);
     res.status(200).json({ message: "User registered successfully!", token });
+    await emailService.sendRegistrationEmail(user.email , user.name);
   } catch (error) {
     res.status(500).json(error.message);
   }
