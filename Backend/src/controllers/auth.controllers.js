@@ -43,7 +43,7 @@ async function loginController(req,res){
         }
         const token = await jwt.sign({userid : user._id}, process.env.JWT_SECRET);
         res.cookie("token", token);
-        res.status(400).json({message : "User login Successfully!",user});
+        res.status(200).json({message : "User login Successfully!",user});
 
     } catch (error) {
         return res.status(500).json(error.message);
